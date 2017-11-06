@@ -1,0 +1,54 @@
+<div class="container">
+<hr>
+<h1>Cars</h1>
+<hr>
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th>Model</th>
+        <th>Mark</th>
+        <th>Year</th>
+        <th>Speed</th>
+        <th>Automatic</th>
+        <th>Engine</th>
+        <th>Doors</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let car of cars">
+            <td class="align-middle">
+                {{ car.model }}
+            </td>
+            <td class="align-middle">
+                {{ car.mark }}
+            </td>
+            <td class="align-middle">
+                {{ car.year }}
+            </td>
+            <td class="align-middle">
+                {{ car.maxSpeed }}
+            </td>
+            <td *ngIf="car.isAutomatic" class="align-middle">
+                Yes
+            </td>
+            <td *ngIf="!car.isAutomatic" class="align-middle">
+                No
+            </td>
+            <td class="align-middle">
+                {{ car.engine }}
+            </td>
+            <td class="align-middle">
+                {{ car.numberOfDoors }}
+            </td>
+            <td>
+                <a class="btn btn-primary" [routerLink]="['/edit', car.id]">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+</div>
+
+<router-outlet></router-outlet>

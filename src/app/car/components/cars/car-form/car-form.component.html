@@ -1,0 +1,65 @@
+<div class="container">
+    <hr>
+        <form #carForm="ngForm" (ngSubmit)="submit(car)">
+            <div class="form-group">
+                  <label>Model</label>
+                  <input #model="ngModel" required minlength="2" [(ngModel)]="car.model" name="model" type="text" class="form-control">
+                  <div *ngIf="model.invalid && (model.dirty || model.touched)" class="alert alert-danger">
+                        <div *ngIf="model.errors.required">
+                              Model is required.
+                        </div>
+                        <div *ngIf="model.errors.minlength">
+                              Model must be at least 2 characters long.
+                        </div>
+                  </div>
+            </div>
+            <div class="form-group">
+                  <label>Mark</label>
+                  <input #mark="ngModel" required minlength="2" [(ngModel)]="car.mark" name="mark" type="text" class="form-control">
+                  <div *ngIf="mark.invalid && (mark.dirty || mark.touched)" class="alert alert-danger">
+                        <div *ngIf="mark.errors.required">
+                              Mark is required.
+                        </div>
+                        <div *ngIf="mark.errors.minlength">
+                              Mark must be at least 2 characters long.
+                        </div>
+                  </div>
+            </div>
+            <div class="form-group" [formGroup]="newTaskFormOne">
+                <label>Number of doors</label>
+                <input [formControlName]="'doors'" required [(ngModel)]="car.numberOfDoors" type="text" class="form-control">
+                <p *ngIf="!newTaskFormOne.controls.doors.valid && newTaskFormOne.controls.doors.touched">Number of doors must be between 2 and 5</p>
+          </div>
+          <div class="form-group" [formGroup]="newTaskForm">
+                <label>Max Speed</label>
+                <input [formControlName]="'speed'" required [(ngModel)]="car.maxSpeed" type="text" class="form-control">
+                <p *ngIf="!newTaskForm.controls.speed.valid && newTaskForm.controls.speed.touched">Max speed must be between 20 and 300</p>
+          </div>
+            <div class="form-group">
+                  <label>Year</label>
+                  <select #year="ngModel" required [(ngModel)]="car.year" name="year" class="form-control" >
+                        <option *ngFor="let year of years">{{ year }}</option>
+                  </select>
+            </div>
+            <div class="form-group">
+                  <label>Engine:</label><br>
+                  <input [(ngModel)]="car.engine" required type="radio" name="engine" value="diesel"> Disel <br>
+                  <input [(ngModel)]="car.engine" required type="radio" name="engine" value="petrol"> Petrol <br>
+                  <input [(ngModel)]="car.engine" required type="radio" name="engine" value="hybrid"> Hybrid <br>
+                  <input [(ngModel)]="car.engine" required type="radio" name="engine" value="electric"> Electric <br>
+            </div>
+            <br>
+            <div>
+                  <label>Type of engine</label> <br>
+                  <input [(ngModel)]="car.isAutomatic" type="checkbox" name="isAutomatic"> Automatic <br>
+            </div>
+
+            <div class="input-group col-md-5 pl-0 my-lg-4 my-2">
+                <button [disabled]="!carForm.valid || !newTaskForm.valid || !newTaskFormOne.valid" type="submit" class="btn btn-primary mr-2">Add car</button>
+                <button type="button" class="btn btn-default mr-2" (click)="carForm.reset()" [disabled]="carForm.form.pristine">
+                        Reset
+                  </button>
+                  <button type="button" class="btn btn-default mr-2" (click)="showCar()">Preview</button>
+            </div>
+          </form>
+    </div>
